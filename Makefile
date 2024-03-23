@@ -1,15 +1,12 @@
-#Makefile
-all: sum-test
+TARGET=byte-order-test
+CXXFLAGS=-g
 
-sum-test: main.o sum.o
-	g++ -o sum-test main.o sum.o
+all: $(TARGET)
 
-main.o: sum.h main.cpp
-	g++ -c -o main.o main.cpp
-
-sum.o: sum.h sum.cpp
-	g++ -c -o sum.o sum.cpp
+$(TARGET): main.o
+	$(LINK.cpp) $^ $(LOADLIBES) $(LDLIBS) -o $@
 
 clean:
-	rm -f sum-test
+	rm -f $(TARGET)
 	rm -f *.o
+
